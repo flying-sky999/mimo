@@ -1,0 +1,13 @@
+accelerate
+deepspeed
+einops
+omegaconf
+diffusers==0.29.0
+huggingface_hub==0.25.2
+transformers
+imageio
+matplotlib
+opencv-python
+decord
+onnxruntime-gpu
+xformers==0.0.28

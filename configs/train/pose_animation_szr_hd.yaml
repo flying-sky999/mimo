@@ -1,0 +1,92 @@
+data:
+  train_bs: 1
+  train_width: 720
+  train_height: 1280
+  meta_paths:
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/douyin_1080p_parts_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/douyin_1080p_parts2_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/douyin_1080p_parts3_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/douyin_1080p_parts4_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/douyin_1080p_parts5_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/douyin_1080p_parts6_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/douyin_1080p_parts7_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/Shuzhiren_xyb_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/Shuzhiren_xyb2_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/Shuzhiren_xyb3_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/Shuzhiren_xyb4_meta.json"
+    - "/youtu_shuziren_qy_large/public_dataset/motion_generation/moore_meta_dw24_qy/Shuzhiren_xyb5_meta.json"
+
+  # Margin of frame indexes between ref and tgt images
+  sample_rate: 10 
+  n_sample_frames: 16
+  num_workers: 4
+  fps: 7
+  motion_bucket_id: 40
+
+noise_scheduler:
+  P_mean: 0.7
+  P_std: 1.6
+  sigma_data: 1
+
+val_data:
+  infer_width: 640
+  infer_height: 960
+  num_frames: 14
+  decode_chunk_size: 8
+  motion_bucket_id: 40
+  fps: 7
+  noise_aug_strength: 0.02
+  num_inference_steps: 25
+  min_guidance_scale: 1.0
+  max_guidance_scale: 3.0
+  tile_size: 16
+  tile_overlap: 2
+  ref_images:
+    - "test_data/val_data/kehu001_img_align.png"
+    - "test_data/val_data/lyf_0_img_align.png"
+  drive_poses:
+    - "test_data/val_data/pose.mp4"
+    - "test_data/val_data/pose.mp4"
+
+solver:
+  gradient_accumulation_steps: 1
+  mixed_precision: 'fp16'
+  enable_xformers_memory_efficient_attention: False
+  gradient_checkpointing: True 
+  max_train_steps: 100000
+  
+  max_grad_norm: 1.0
+  # lr
+  learning_rate: 1.0e-5
+  scale_lr: False 
+  lr_warmup_steps: 500
+  lr_scheduler: 'constant'
+
+  # optimizer
+  use_8bit_adam: False
+  adam_beta1: 0.9
+  adam_beta2: 0.999
+  adam_weight_decay:  1.0e-2
+  adam_epsilon: 1.0e-8
+
+allow_tf32: True
+total_limit: 20
+save_model_epoch_interval: 20
+use_ema: False
+random_null_ratio: 0.05
+target_ema_decay: 0.95
+checkpointing_steps: 1500
+pretrained_model_name_or_path: "/youtu_shuziren_qy_large/users/zhengkjiang/stable-video-diffusion-img2vid-xt-1-1"
+pretrained_sd_model_name_or_path: "/youtu_shuziren_qy_large/users/zhengkjiang/stable-diffusion-2-1"
+
+
+reference_net_checkpoint_path: ""
+unet_checkpoint_path: ""
+pose_guider_checkpoint_path: ""
+pretrained_text_path: ""
+resume_from_checkpoint: False
+pose_guider_pretrain: False
+
+seed: 1234
+exp_name: 'reference_net_xt-1-1_16frames_720x1280_bs1_szr_hd'
+output_dir: 'exp_outputs'  

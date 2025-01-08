@@ -4,15 +4,19 @@ data prepare
 ```
 cd assets/
 mkdir data/
-
+Store data as follow format
+--/data
+----/mimo
+----/mimo_segmentation
 ```
 
-model weight
+model weight prepare
 ```
 mkdir models
 ### SVD-xt-1-1
 链接: https://pan.baidu.com/s/1qEF0qjQIhfp-pCBbFtI2Pw?pwd=qehm 
 提取码: qehm 
+unzip 
 ### DWPose
 mkdir DWPose
 wget https://huggingface.co/yzd-v/DWPose/resolve/main/yolox_l.onnx?download=true -O models/DWPose/yolox_l.onnx
